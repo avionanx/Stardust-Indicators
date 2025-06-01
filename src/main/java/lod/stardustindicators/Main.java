@@ -55,6 +55,10 @@ public class Main {
   }
   @EventListener
   public void init(final GameLoadedEvent event) throws URISyntaxException {
+    if(this.stardustIndicator != null) {
+      this.stardustIndicator.unload();
+    }
+
     this.stardustIndicator = new AnimatedSprite(24);
     this.stardustIndicator.load("sparkle");
   }

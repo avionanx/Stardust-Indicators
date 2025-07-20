@@ -7,7 +7,6 @@ import legend.core.opengl.MeshObj;
 import legend.core.opengl.QuadBuilder;
 import legend.core.opengl.Texture;
 
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -20,22 +19,18 @@ public class AnimatedSprite {
     private MeshObj quad;
     ArrayList<Texture> textures;
 
-    private int currentFrame = 0;
-    final private int maxFrames;
-
-    AnimatedSprite(int maxFrames) {
+    AnimatedSprite() {
         this.textures = new ArrayList<>();
-        this.maxFrames = maxFrames;
     }
 
-    public void load(String name) throws URISyntaxException {
+    public void load(String name) {
         int index = 0;
         while(true) { // oops i sinned again
             final Path path = Path.of("mods", "stardustindicators", "%s".formatted(name), "%d.png".formatted(index));
             if(Files.exists(path)) {
                 this.textures.add(Texture.png(path));
                 index++;
-            }else {
+            } else {
                 break;
             }
         }
@@ -49,7 +44,7 @@ public class AnimatedSprite {
                 .build();
     }
 
-    public void render(final MV screenSpaceTransforms) {
+    public void render(final MV screenSpaceTransforms, final int currentFrame, final int maxFrames) {
         final double progress = (double)currentFrame/maxFrames;
         final Texture currentTexture = this.textures.get((int)Math.floor(progress * (this.textures.size() - 1)));
 
@@ -57,8 +52,6 @@ public class AnimatedSprite {
                 .screenspaceOffset(GPU.getOffsetX() + GTE.getScreenOffsetX(), GPU.getOffsetY() + GTE.getScreenOffsetY())
                 .useTextureAlpha()
                 .texture(currentTexture);
-
-        currentFrame = (currentFrame + 1) % maxFrames;
     }
 
     public void unload() {

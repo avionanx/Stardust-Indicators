@@ -5,6 +5,7 @@ import legend.game.EngineStateEnum;
 import legend.game.modding.events.RenderEvent;
 import legend.game.modding.events.gamestate.GameLoadedEvent;
 import legend.game.modding.events.submap.SubmapObjectTextureEvent;
+import legend.game.submap.SMap;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.legendofdragoon.modloader.Mod;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import static legend.core.GameEngine.*;
-import static legend.game.Scus94491BpeSegment_8004.engineState_8004dd20;
+import static legend.game.EngineStates.currentEngineState_8004dd04;
 import static legend.game.Scus94491BpeSegment_800b.gameState_800babc8;
 import static legend.game.combat.SEffe.transformWorldspaceToScreenspace;
 
@@ -69,7 +70,7 @@ public class Main {
 
   @EventListener
   public void render(final RenderEvent event) {
-    if(engineState_8004dd20 == EngineStateEnum.SUBMAP_05) {
+    if(currentEngineState_8004dd04 instanceof SMap && !SCRIPTS.isPaused()) {
       this.transforms.forEach(transform -> {
         final Vector2f screenSpaceTransforms = new Vector2f();
 

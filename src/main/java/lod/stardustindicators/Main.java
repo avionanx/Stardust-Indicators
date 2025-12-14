@@ -1,7 +1,7 @@
 package lod.stardustindicators;
 
 import legend.core.gte.MV;
-import legend.game.EngineStateEnum;
+import legend.game.modding.events.inventory.ScriptFlags2ChangedEvent;
 import legend.game.modding.events.RenderEvent;
 import legend.game.modding.events.gamestate.GameLoadedEvent;
 import legend.game.modding.events.submap.SubmapObjectTextureEvent;
@@ -66,6 +66,17 @@ public class Main {
 
     this.stardustIndicator = new AnimatedSprite();
     this.stardustIndicator.load("sparkle");
+  }
+
+  @EventListener
+  public void onStardustCollected(final ScriptFlags2ChangedEvent event) {
+    for(int i = 0; i < this.flags.size(); i++) {
+      if(this.flags.get(i) == event.index) {
+        this.flags.remove(i);
+        this.transforms.remove(i);
+        break;
+      }
+    }
   }
 
   @EventListener

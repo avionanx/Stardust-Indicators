@@ -36,7 +36,7 @@ public class Main {
     EVENTS.register(this);
     this.flags = new ArrayList<>();
     this.transforms = new ArrayList<>();
-    cacheMV = new MV();
+    this.cacheMV = new MV();
   }
 
   public static RegistryId id(final String entryId) {

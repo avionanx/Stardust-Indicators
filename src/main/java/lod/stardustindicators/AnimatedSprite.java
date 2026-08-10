@@ -28,7 +28,9 @@ public class AnimatedSprite {
         while(true) { // oops i sinned again
             final Path path = Path.of("mods", "stardustindicators", "%s".formatted(name), "%d.png".formatted(index));
             if(Files.exists(path)) {
-                this.textures.add(Texture.png(path));
+                final Texture stardustTexture = Texture.png("SPARKLE", path);
+                stardustTexture.persistent = true;
+                this.textures.add(stardustTexture);
                 index++;
             } else {
                 break;

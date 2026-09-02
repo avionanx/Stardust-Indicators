@@ -1,11 +1,11 @@
 package lod.stardustindicators;
 
-import legend.core.QueuedModelStandard;
+import legend.core.renderer.QueuedModelStandard;
 import legend.core.gpu.Bpp;
 import legend.core.gte.MV;
-import legend.core.opengl.MeshObj;
-import legend.core.opengl.QuadBuilder;
-import legend.core.opengl.Texture;
+import legend.core.renderer.MeshObj;
+import legend.core.renderer.QuadBuilder;
+import legend.core.renderer.Texture;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,6 +44,7 @@ public class AnimatedSprite {
                 .pos(-0.5f,-0.5f,0.0f)
                 .rgb(1.0f, 1.0f, 1.0f)
                 .build();
+        this.quad.persistent = true;
     }
 
     public void render(final MV screenSpaceTransforms, final int currentFrame, final int maxFrames) {
